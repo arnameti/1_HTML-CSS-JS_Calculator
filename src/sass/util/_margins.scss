@@ -1,0 +1,17 @@
+@use 'functions' as f;
+
+.mb-tn {
+  margin-bottom: f.rem(20);
+}
+.mb-sm {
+  margin-bottom: f.rem(30);
+}
+.mb-md {
+  margin-bottom: f.rem(40);
+}
+.mb-lg {
+  margin-bottom: f.rem(50);
+}
+.mb-hg {
+  margin-bottom: f.rem(60);
+}
