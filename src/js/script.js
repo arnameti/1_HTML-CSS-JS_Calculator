@@ -69,6 +69,14 @@ calculatorEl.addEventListener('click', function (e) {
     displayResult(result);
   }
 
+  if (buttonType === 'clear') {
+    removeSelectionFromBtn('calculator__operator--selected');
+    calculatorEl.dataset.firstNumber = '';
+    calculatorEl.dataset.previousBtnType = '';
+    calculatorEl.dataset.operator = '';
+    displayedResultEl.textContent = '0';
+  }
+
   // set dataset, save type of previous btn
   calculatorEl.dataset.previousBtnType = buttonType;
 });
