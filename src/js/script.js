@@ -15,18 +15,24 @@ calculatorEl.addEventListener('click', function (e) {
   const clickedValue = clicked.textContent;
   const displayedValue = +displayedResultEl.textContent;
   const buttonType = clicked.dataset.button;
+  const previousKeyType = calculatorEl.dataset.previousKeyType;
+
+  const displayResult = value => (displayedResultEl.textContent = value);
+  const savePrevClickedBtn = buttonType =>
+    (calculatorEl.dataset.previousKeyType = buttonType);
 
   // if clicked button is a number
   if (buttonType === 'number') {
-    if (displayedValue === 0) {
-      displayedResultEl.textContent = clickedValue;
+    if (displayedValue === 0 || previousKeyType === 'operator') {
+      displayResult(clickedValue);
     } else {
-      displayedResultEl.textContent = displayedValue + clickedValue;
+      displayResult(displayedValue + clickedValue);
     }
   }
 
   // if clicked button is an operator
   if (buttonType === 'operator') {
-    calculatorEl.dataset.previousKeyType = 'operator';
   }
+
+  savePrevClickedBtn(buttonType);
 });
