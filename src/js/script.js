@@ -35,6 +35,7 @@ calculatorEl.addEventListener('click', function (e) {
   const { previousBtnType } = calculatorEl.dataset;
 
   if (buttonType === 'number') {
+    removeSelectionFromBtn('calculator__operator--selected');
     if (displayedValue === '0' || previousBtnType === 'operator') {
       displayResult(clickedValue);
     } else {
@@ -62,9 +63,6 @@ calculatorEl.addEventListener('click', function (e) {
     const { operator } = calculatorEl.dataset;
 
     const result = calculate(firstNumber, operator, secondNumber);
-
-    //select highlighted operator btn, remove the class to remove the highlighting
-    removeSelectionFromBtn('calculator__operator--selected');
 
     displayResult(result);
   }

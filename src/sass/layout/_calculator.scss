@@ -37,6 +37,11 @@
     padding-inline: u.rem(25);
     border: none;
     border-radius: 50%;
+    transition: all 0.1s linear;
+
+    &:active {
+      transform: translateY(2px);
+    }
   }
 
   &__operator {
