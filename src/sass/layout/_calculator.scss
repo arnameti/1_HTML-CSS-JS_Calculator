@@ -37,22 +37,27 @@
     padding-inline: u.rem(25);
     border: none;
     border-radius: 50%;
+  }
 
-    &--operator {
-      background-color: var(--clr-grey-light);
-    }
+  &__operator {
+    background-color: var(--clr-grey-light);
+    transition: all 0.1s linear;
 
-    &--number {
-      background-color: var(--clr-grey-dark);
-      color: var(--clr-white);
+    &--selected {
+      background-color: hsl(60, 2%, 50%);
     }
+  }
 
-    &--equal {
-      grid-column: 4 / 5;
-      grid-row: 2 / 6;
-      background-color: var(--clr-orange);
-      border-radius: u.rem(20);
-      color: var(--clr-white);
-    }
+  &__number {
+    background-color: var(--clr-grey-dark);
+    color: var(--clr-white);
+  }
+
+  &__equal {
+    grid-column: 4 / 5;
+    grid-row: 2 / 6;
+    background-color: var(--clr-orange);
+    border-radius: u.rem(20);
+    color: var(--clr-white);
   }
 }
