@@ -7,22 +7,22 @@
 const calculatorEl = document.querySelector('[data-calculator]');
 const displayedResultEl = calculatorEl.querySelector('[data-result]');
 
-const clickedValue = clicked.textContent;
-const displayedValue = +displayedResultEl.textContent;
-const buttonType = clicked.dataset.button;
-const previousKeyType = calculatorEl.dataset.previousKeyType;
-
 const displayResult = value => (displayedResultEl.textContent = value);
-const savePrevClickedBtn = buttonType =>
-  (calculatorEl.dataset.previousKeyType = buttonType);
+const typeOfPrevClickedBtn = buttonType =>
+  (calculatorEl.dataset.previousBtnType = buttonType);
 
 calculatorEl.addEventListener('click', function (e) {
   const clicked = e.target.closest('[data-button]');
 
   if (!clicked) return;
 
+  const clickedValue = clicked.textContent;
+  const buttonType = clicked.dataset.button;
+  const displayedValue = +displayedResultEl.textContent;
+  const { previousBtnType } = calculatorEl.dataset;
+
   if (buttonType === 'number') {
-    if (displayedValue === 0 || previousKeyType === 'operator') {
+    if (displayedValue === 0 || previousBtnType === 'operator') {
       displayResult(clickedValue);
     } else {
       displayResult(displayedValue + clickedValue);
@@ -37,10 +37,19 @@ calculatorEl.addEventListener('click', function (e) {
 
     // add class to operator-btn, to add the highlight
     clicked.classList.add('calculator__operator--selected');
+
+    // adding a dataset for the firstNumber and for the operator, which will be needed for the calculation
+    calculatorEl.dataset.firstNumber = displayedValue;
+    calculatorEl.dataset.operator = clicked.dataset.operator;
   }
 
   if (buttonType === 'equal') {
+    const { firstNumber } = calculatorEl.dataset;
+    const secondNumber = displayedValue;
+    const { operator } = calculatorEl.dataset;
+
+    console.log(firstNumber, secondNumber, operator);
   }
 
-  savePrevClickedBtn(buttonType);
+  typeOfPrevClickedBtn(buttonType);
 });
