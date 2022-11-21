@@ -12,6 +12,12 @@ const displayResult = value => (displayedResultEl.textContent = value);
 const typeOfPrevClickedBtn = buttonType =>
   (calculatorEl.dataset.previousBtnType = buttonType);
 
+const removeSelectionFromBtn = btn => {
+  const currentSelectedOperator = calculatorEl.querySelector(`.${btn}`);
+  console.log(currentSelectedOperator);
+  currentSelectedOperator?.classList.remove(btn);
+};
+
 calculatorEl.addEventListener('click', function (e) {
   const clicked = e.target.closest('[data-button]');
 
@@ -32,9 +38,9 @@ calculatorEl.addEventListener('click', function (e) {
 
   // prettier-ignore
   if (buttonType === 'operator') {
+    
     //select highlighted element and remove the class to remove the highlighting
-    const currentSelectedOperator = calculatorEl.querySelector('.calculator__operator--selected');
-    currentSelectedOperator?.classList.remove('calculator__operator--selected');
+    removeSelectionFromBtn('calculator__operator--selected');
 
     // add class to operator-btn, to add the highlight
     clicked.classList.add('calculator__operator--selected');
@@ -59,10 +65,7 @@ calculatorEl.addEventListener('click', function (e) {
     if (operator === 'divide') result = firstNumber / secondNumber;
 
     //select highlighted element and remove the class to remove the highlighting
-    const currentSelectedOperator = calculatorEl.querySelector(
-      '.calculator__operator--selected'
-    );
-    currentSelectedOperator?.classList.remove('calculator__operator--selected');
+    removeSelectionFromBtn('calculator__operator--selected');
 
     displayResult(result);
   }
