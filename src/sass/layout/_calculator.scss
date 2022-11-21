@@ -14,6 +14,15 @@
   &__display {
     height: u.rem(130);
     margin-bottom: u.rem(20);
+
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+  }
+
+  &__result {
+    color: var(--clr-white);
+    font-size: u.rem(50);
   }
 
   &__buttons {

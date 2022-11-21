@@ -5,7 +5,6 @@
 // }
 
 const calculatorEl = document.querySelector('[data-calculator]');
-console.log(calculatorEl);
 
 calculatorEl.addEventListener('click', function (e) {
   const clicked = e.target.closest('[data-button]');
