@@ -9,13 +9,19 @@ const displayedResultEl = calculatorEl.querySelector('[data-result]');
 
 const displayResult = value => (displayedResultEl.textContent = value);
 
-const typeOfPrevClickedBtn = buttonType =>
-  (calculatorEl.dataset.previousBtnType = buttonType);
-
 const removeSelectionFromBtn = btn => {
   const currentSelectedOperator = calculatorEl.querySelector(`.${btn}`);
-  console.log(currentSelectedOperator);
   currentSelectedOperator?.classList.remove(btn);
+};
+
+const calculate = (firstNumber, operator, secondNumber) => {
+  let result;
+  if (operator === 'plus') result = firstNumber + secondNumber;
+  if (operator === 'minus') result = firstNumber - secondNumber;
+  if (operator === 'times') result = firstNumber * secondNumber;
+  if (operator === 'divide') result = firstNumber / secondNumber;
+
+  return result;
 };
 
 calculatorEl.addEventListener('click', function (e) {
@@ -38,18 +44,16 @@ calculatorEl.addEventListener('click', function (e) {
 
   // prettier-ignore
   if (buttonType === 'operator') {
-    
-    //select highlighted element and remove the class to remove the highlighting
+
+    //select highlighted operator btn, remove the class to remove the highlighting
     removeSelectionFromBtn('calculator__operator--selected');
 
-    // add class to operator-btn, to add the highlight
+    // add class to clicked operator-btn, to add the highlight
     clicked.classList.add('calculator__operator--selected');
 
     // adding a dataset for the firstNumber and for the operator, which will be needed for the calculation
     calculatorEl.dataset.firstNumber = displayedValue;
     calculatorEl.dataset.operator = clicked.dataset.operator;
-
-    console.log(clicked.dataset.operator)
   }
 
   if (buttonType === 'equal') {
@@ -57,18 +61,14 @@ calculatorEl.addEventListener('click', function (e) {
     const secondNumber = +displayedValue;
     const { operator } = calculatorEl.dataset;
 
-    let result;
+    const result = calculate(firstNumber, operator, secondNumber);
 
-    if (operator === 'plus') result = firstNumber + secondNumber;
-    if (operator === 'minus') result = firstNumber - secondNumber;
-    if (operator === 'times') result = firstNumber * secondNumber;
-    if (operator === 'divide') result = firstNumber / secondNumber;
-
-    //select highlighted element and remove the class to remove the highlighting
+    //select highlighted operator btn, remove the class to remove the highlighting
     removeSelectionFromBtn('calculator__operator--selected');
 
     displayResult(result);
   }
 
-  typeOfPrevClickedBtn(buttonType);
+  // set dataset, save type of previous btn
+  calculatorEl.dataset.previousBtnType = buttonType;
 });
